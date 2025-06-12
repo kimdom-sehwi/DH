@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Realgrün Layout</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      overflow: hidden;
+      font-family: 'Noto Sans', sans-serif;
+      background-color: #22243B;
+    }
+    
+    
+
+    #wrapper {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+
+    header.header {
+      text-align: center;
+      transition: top 0.3s ease;
+      position: sticky;
+      top: 0;
+      width: 100%;
+      z-index: 9;
+      font-size: 1rem;
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid #6674FF;
+      height: 43px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #00B9FF;
+    }
+
+    .container {
+      display: flex;
+      flex: 1;
+      height: calc(100vh - 43px);
+    }
+
+    .left-panel {
+      width: 40%;
+      background-color: #22243B;
+      padding: 20px;
+      overflow-y: scroll;
+      scrollbar-width: none;
+    }
+
+    .left-panel::-webkit-scrollbar {
+      display: none;
+    }
+
+    .right-panel {
+      width: 60%;
+      background-color: #22243B;
+      padding: 20px;
+      overflow-y: scroll;
+    }
+
+    .emph {
+  font-weight: bold; 
+}
+
+    .text-content p {
+      margin-bottom: 10px;
+      font-size: 16px;
+      line-height: 1.6;
+      white-space: pre;
+      color: #00B9FF;
+    }
+
+    .text-content .highlight {
+      color: #00FFFF;
+      font-weight: bold;
+    }
+    .category-title {
+     font-size: 12px;
+     font-weight: lighter;
+     margin-bottom: 10px;
+     color: #00FFFF;
+    }
+    .image-column {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  flex: 1;
+  max-height: calc(100vh - 43px); 
+  overflow-y: auto;
+  padding-right: 5px; 
+  scrollbar-width: thin;
+  scrollbar-width: none; !important;         
+  -ms-overflow-style: none;       
+}
+
+.image-column::-webkit-scrollbar {
+  display: none;                  
+}
+
+.image-column::-webkit-scrollbar {
+  width: 0;
+  background: transparent;
+}
+
+    .image-grid {
+      display: flex;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      position: relative;
+    }
+
+    .image-grid::before,
+    .image-grid::after,
+    .image-grid .grid-divider {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 0.5px;
+      background-color: #00FFFF;
+    }
+
+    .image-grid::before {
+      left: 24%;
+    }
+    .image-grid::after {
+      left: 75%;
+    }
+    .grid-divider {
+      left: 50%;
+    }
+
+    .image-item img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .image-item p {
+      margin-top: 5px;
+      font-size: 14px;
+    }
+    .keyword-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 20px 0;
+}
+
+.keyword {
+  display: inline-block;
+  background-color: #00F08C;
+  color: #22243B;
+  padding: 6px 10px;
+  border-radius: 12px;
+  font-size: 13px;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+    .floating-circle-btn {
+  position: fixed;
+  right: 30px;
+  bottom: 20px;  
+  width: 35px;
+  height: 35px;
+  background-color: #6674FF;
+  border: 1px solid #6674FF;
+  border-radius: 50%;
+  color: #ffffff;
+  font-size: 10px;
+  text-align: center;
+  line-height: 35px;
+  text-decoration: none;
+  z-index: 9999;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  transition: all 0.3s ease;
+}
+  .image-item p {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease, opacity 0.4s ease;
+  opacity: 0;
+  margin-top: 0;
+  font-size: 12px;
+  font-weight: lighter;
+  color: #FFFFFF;
+  hyphens: none;
+  overflow-wrap: normal;
+  word-break: keep-all;
+  }
+
+ .image-item p.open {
+  max-height: 200px; 
+  opacity: 1;
+  margin-top: 5px;
+}
+
+.floating-circle-btn:hover {
+  background-color: #00FFFF;
+  color: black;
+}
+    .left-panel,
+    .right-panel,
+    .left-panel * ,
+    .right-panel * {
+    cursor: url('cursor.png') 16 16, auto !important;
+    }
+  </style>
+</head>
+<body>
+  <div id="wrapper">
+    <header class="header">
+      ✺대한헌정✺
+    </header>
+    <div class="container">
+      <div class="left-panel">
+        <div class="text-content">
+          <p>대한헌정</br> </p>
+          <p>대한의 주권은 국민에게 있고, 모든 권력은 국민으로부터 나온다. </p>
+          <p class="highlight">                ✥제발싸네 찍 삼류전구✥</p>
+          <p><span class="emph">제</span> = 제헌헌법: (1948) 대한민국 최초 헌법 제정, 자유민주주의·대통령제 기반 확립</p>
+<p><span class="emph">    발</span> = 발췌개헌: (1952) 이승만의 직선제 집착으로 발췌·기습 통과된 첫 개헌</p>
+<p><span class="emph">         싸</span> = 사사오입개헌: (1954) 이승만 3선 연임을 위한 위헌적 표 계산, ‘4할5입’</p>
+<p><span class="emph">                네</span> = 내각제 개헌: (1960) 4·19 혁명 후 대통령제 폐지,</br>                        허정 과도정부를 거쳐 의원내각제로 전환</p>
+<p><span class="emph">                       찍</span> = 직선제 개헌: (1962) 5·16 군사쿠데타 후 박정희 체제가 주도, </br>                               대통령 직선제로 복귀</p>
+<p><span class="emph">                  삼</span> = 삼선제 개헌: (1969) 박정희가 3선 출마를 위해 추진한 개헌. </br>                          영구집권 야욕의 서막</p>
+<p><span class="emph">             류</span> = 유신헌법: (1972) 통일주체국민회의 통한 간접 선거제 도입, </br>                    긴급조치 등 초헌법적 권력 집중</p>
+<p><span class="emph">       전</span> = 전두환 헌법: (1980) 5·17 계엄 후 제5공화국 헌법 공포,</br>               대통령 7년 단임 간선제로 유지</p>
+<p><span class="emph"> 구</span> = 9차 개헌: (1987) 6월 민주항쟁 이후 체결된 9차 개헌. </br>         직선제 도입과 민주주의 회복의 출발점</br> </br></p>
+
+<p class="highlight">제헌헌법</p>
+<p>자유민주주의, 3권분립, 대통령 중심제 등 헌정 체계 확립.</br>헌정 질서 출발점, 그러나 권력구조 논쟁의 시작점이 되었다.</br> </p>
+  <p class="highlight">발췌개헌</p>
+<p>이승만이 재선을 위해 대통령 직선제를 추진, 국회 반대로 좌절되자</br>계엄령을 선포하고 군경으로 국회를 포위. 개헌안을 발췌한 채로 표결해 통과시켰다.</br> </p>
+  <p class="highlight">사사오입개헌</p>
+<p>이승만의 3선 제한 철폐 목적.</br>개헌안은 부결되었지만, “사사오입” 논리로 정족수 계산을 왜곡해 통과 처리하였다.</br> </p>
+  <p class="highlight">내각제 개헌</p>
+<p>4·19 혁명으로 이승만 하야 후, 헌정 질서 재정비. </br>대통령 중심제를 폐지하고 의원내각제와 이원집정부제적 요소 도입하였다.</br> </p>
+  <p class="highlight">직선제 개헌</p>
+<p>5·16 쿠데타 후 박정희 정권이 민정 복귀를 명목으로 국민투표 실시하였다. </br>대통령 직선제 부활, 정당 활동 보장 등 포함하지만 실질적으로 군사정권의 제도화였다.</br> </p>
+  <p class="highlight">삼선제 개헌</p>
+<p>박정희가 3선 출마를 위해 추진한 개헌. </br>국민적 반발에도 불구하고 여당의 주도로 국회를 통과했고, 야당 의원 매수 의혹과 </br>헌법정신 파괴 비판이 따랐다.</br> </p>  
+<p class="highlight">유신헌법</p>
+<p>박정희가 국회 해산 후 비상계엄 아래 유신체제 선포. </br>헌법상 독재 정권 확립, 대한민국 헌정사 최악의 폭압헌법으로 남았다.</br> </p>  
+<p class="highlight">전두환 헌법</p>
+<p>5·17 비상계엄 확대와 국회 해산 후 제5공화국 헌법 제정. </br>대통령 7년 단임, 기본권 일부 복구, 간선제 유지 / 권위주의적 질서 유지하였다.</br> </p>
+  <p class="highlight">9차 개헌</p>
+<p>형식적 민주주의를 벗어나 실질적 민주주의로의 복귀 시도.</br>대통령 직선제 도입, 국회 기능 확대, 인권 조항 강화.</br> </br> </p>
+
+<p>작은 열쇳말</p>
+          <div class="keyword-group">
+  <span class="keyword">제헌</span>
+  <span class="keyword">국호</span>
+  <span class="keyword">자유민주주의</span>
+</div>
+<div class="keyword-group">
+  <span class="keyword">발췌</span>
+  <span class="keyword">사사오입</span>
+  <span class="keyword">계엄령</span>
+  <span class="keyword">4.19혁명</span>
+</div>
+<div class="keyword-group">
+  <span class="keyword">쿠데타</span>
+  <span class="keyword">직선제</span>
+</div>
+<div class="keyword-group">
+  <span class="keyword">박정희</span>
+  <span class="keyword">부정선거</span>
+  <span class="keyword">독재정권</span>
+</div>
+<div class="keyword-group">
+  <span class="keyword">민주주의</span>
+  <span class="keyword">직선제</span>
+</div>
+
+        </div>
+      </div>
+      <div class="right-panel">
+        <div class="image-grid">
+          <div class="grid-divider"></div>
+          <div class="image-column">
+          <h3 class="category-title">사진</h3>
+          <div class="image-item"><img src="dhhj.p1.jpg" alt="Projektname 2"><p>미 군정청 내 국회의사당에서 개최된 제헌국회 개원식</p></div>
+          <div class="image-item"><img src="dhhj.p2.jpg" alt="Projektname 2"><p>발췌개헌 승인 당시 기립 표결을 하는 상황</p></div>
+          <div class="image-item"><img src="dhhj.p3.jpg" alt="Projektname 3"><p>부산정치파동</br>이승만 대통령은 내각제를 주장하는 야당 의원 50여 명을 헌병대가 연행하는 정치적 파행을 일으켰다.</p></div>
+          <div class="image-item"><img src="dhhj.p4.jpg" alt="Projektname 1"><p>사사오입 개헌안이 통과되자 민주당 의원 이철승이 단상에 뛰어올라 국회부의장 최순주의 멱살을 잡았다</p></div>
+          <div class="image-item"><img src="dhhj.p5.jpg" alt="Projektname 2"><p>
+          제6대 대통령 선거(1967년)포스터</p></div>
+          <div class="image-item"><img src="dhhj.p6.jpg" alt="Projektname 1"><p>제6대 대통령 선거(6.8)부정선거시위에 참여한 서울대학교 학생들</p></div>
+          <div class="image-item"><img src="dhhj.p7.jpg" alt="Projektname 2"><p>‘유신’국민투표 하는 박정희와 박근혜</p></div>
+          <div class="image-item"><img src="dhhj.p8.jpg" alt="Projektname 1"><p>대통령직선제가 복구된 후 1997년 제15대 대통령 선거 포스터</p></div>
+          </div>
+          
+
+       <div class="image-column">
+         <h3 class="category-title">문학</h3>
+          <div class="image-item"><img src="dhhj.a2.jpg" alt="Projektname 7"><p>문병란 - ⟪나의 칼 나의 피⟫ 시</br>투쟁과 희생을 통해 진정한 자유의 쟁취를 갈망함.</p></div>
+          <div class="image-item"><img src="dhhj.a3.jpg" alt="Projektname 8"><p>이문열 - ⟪우리들의 일그러진 영웅⟫ 소설 </br>독재자의 폭력적 권력에 대한 반발로 4‧19혁명이 일어나기까지 당시의 한국 정치상황을 풍자한 소설이다.</p></div>
+          <div class="image-item"><img src="dhhj.a4.jpg" alt="Projektname 8"><p>김지하 - ⟪타는 목마름으로⟫ 시 </br>민주주의 운동에 각종 탄압이 들어가고, 박정희가 유신헌법을 발표한 시기에 쓰여졌다.</p></div>
+
+      </div>
+       <div class="image-column">
+         <h3 class="category-title">예술</h3>
+          <div class="image-item"><img src="dhhj.y1.jpg" alt="Projektname 8"><p><효자동 이발사> 영화 2004</br>이승만 정부 부정선거부터 4.19 혁명 그리고 박정희 5.16 군사정변 독재정권까지 블랙 코미디로 풍자하고 있는 작품이다.</p></div>
+          <div class="image-item"><img src="dhhj.y2.jpg" alt="Projektname 8"><p>야인시대 드라마 2002 103~104화</br>사사오입이 처음 부결되는 장면, 사사오입 선포로 야당 의원들이 반발하고 개입하는 장면이 나온다.</p></div>
+      </div>
+      <div class="image-column">
+         <h3 class="category-title">공간</h3>
+          <div class="image-item"><img src="dhhj.m1.jpg" alt="Projektname 6"><p>국회의사당(서울)</br>대한민국 국회의 회의가 열리는 건물이다.</p></div>
+          <div class="image-item"><img src="dhhj.m2.jpg" alt="Projektname 7"><p>헌정기념관(서울)</br>제헌국회가 개원한 이래로 국회에서 있었던 다양한 기록을 통해 우리 헌정사를 재조명하는 공간이다.</p></div>
+          <div class="image-item"><img src="dhhj.m3.jpg" alt="Projektname 8"><p>헌법재판소(서울)</br>대한민국에서 대부분의 헌법재판을 관장하는 단일 법원이자 최고 법원이다.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+ <a href="index.html#content" class="floating-circle-btn">🡠</a>v
+ <script>
+  document.querySelectorAll('.image-item').forEach(item => {
+    const desc = item.querySelector('p');
+
+    item.addEventListener('click', () => {
+      const isOpen = desc.classList.contains('open');
+
+      if (!isOpen) {
+        desc.classList.add('open');
+        desc.style.maxHeight = desc.scrollHeight + "px";
+      } else {
+        desc.style.maxHeight = desc.scrollHeight + "px";
+        requestAnimationFrame(() => {
+          desc.style.maxHeight = "0px";
+          desc.classList.remove('open');
+        });
+      }
+    });
+  });
+
+  // 스크롤 시 닫기
+  let scrollTimeout;
+  const scrollTarget = document.querySelector('.right-panel');
+
+  if (scrollTarget) {
+    scrollTarget.addEventListener('scroll', () => {
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(() => {
+        document.querySelectorAll('.image-item p.open').forEach(desc => {
+          desc.style.maxHeight = desc.scrollHeight + "px"; // 현재 높이 재설정
+          requestAnimationFrame(() => {
+            desc.style.maxHeight = "0px";
+            desc.classList.remove('open');
+          });
+        });
+      }, 50);
+    });
+  }
+</script>
+</body>
+</html>

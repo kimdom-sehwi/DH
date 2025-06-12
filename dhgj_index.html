@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Realgrün Layout</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      overflow: hidden;
+      font-family: 'Noto Sans', sans-serif;
+      background-color: #22243B;
+    }
+    
+    
+
+    #wrapper {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+
+    header.header {
+      text-align: center;
+      transition: top 0.3s ease;
+      position: sticky;
+      top: 0;
+      width: 100%;
+      z-index: 9;
+      font-size: 1rem;
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid #6674FF;
+      height: 43px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #00B9FF;
+    }
+
+    .container {
+      display: flex;
+      flex: 1;
+      height: calc(100vh - 43px);
+    }
+
+    .left-panel {
+      width: 40%;
+      background-color: #22243B;
+      padding: 20px;
+      overflow-y: scroll;
+      scrollbar-width: none;
+    }
+
+    .left-panel::-webkit-scrollbar {
+      display: none;
+    }
+
+    .right-panel {
+      width: 60%;
+      background-color: #22243B;
+      padding: 20px;
+      overflow-y: scroll;
+    }
+
+    .emph {
+  font-weight: bold; 
+}
+
+    .text-content p {
+      margin-bottom: 10px;
+      font-size: 16px;
+      line-height: 1.6;
+      white-space: pre;
+      color: #00B9FF;
+    }
+
+    .text-content .highlight {
+      color: #00FFFF;
+      font-weight: bold;
+    }
+    .category-title {
+     font-size: 12px;
+     font-weight: lighter;
+     margin-bottom: 10px;
+     color: #00FFFF;
+    }
+    .image-column {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  flex: 1;
+  max-height: calc(100vh - 43px); 
+  overflow-y: auto;
+  padding-right: 5px; 
+  scrollbar-width: thin;
+  scrollbar-width: none; !important;         
+  -ms-overflow-style: none;       
+}
+
+.image-column::-webkit-scrollbar {
+  display: none;                  
+}
+
+.image-column::-webkit-scrollbar {
+  width: 0;
+  background: transparent;
+}
+
+    .image-grid {
+      display: flex;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      position: relative;
+    }
+
+    .image-grid::before,
+    .image-grid::after,
+    .image-grid .grid-divider {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 0.5px;
+      background-color: #00FFFF;
+    }
+
+    .image-grid::before {
+      left: 24%;
+    }
+    .image-grid::after {
+      left: 75%;
+    }
+    .grid-divider {
+      left: 50%;
+    }
+
+    .image-item img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .image-item p {
+      margin-top: 5px;
+      font-size: 14px;
+    }
+    .keyword-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 20px 0;
+}
+
+.keyword {
+  display: inline-block;
+  background-color: #00F08C;
+  color: #22243B;
+  padding: 6px 10px;
+  border-radius: 12px;
+  font-size: 13px;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+    .floating-circle-btn {
+  position: fixed;
+  right: 30px;
+  bottom: 20px; 
+  width: 35px;
+  height: 35px;
+  background-color: #6674FF;
+  border: 1px solid #6674FF;
+  border-radius: 50%;
+  color: #ffffff;
+  font-size: 10px;
+  text-align: center;
+  line-height: 35px;
+  text-decoration: none;
+  z-index: 9999;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  transition: all 0.3s ease;
+}
+  .image-item p {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease, opacity 0.4s ease;
+  opacity: 0;
+  margin-top: 0;
+  font-size: 12px;
+  font-weight: lighter;
+  color: #FFFFFF;
+  hyphens: none;
+  overflow-wrap: normal;
+  word-break: keep-all;
+  }
+
+ .image-item p.open {
+  max-height: 200px; 
+  opacity: 1;
+  margin-top: 5px;
+}
+
+.floating-circle-btn:hover {
+  background-color: #00FFFF;
+  color: black;
+}
+    .left-panel,
+    .right-panel,
+    .left-panel * ,
+    .right-panel * {
+    cursor: url('cursor.png') 16 16, auto !important;
+    }
+  </style>
+</head>
+<body>
+  <div id="wrapper">
+    <header class="header">
+      ✺대한경제✺
+    </header>
+    <div class="container">
+      <div class="left-panel">
+        <div class="text-content">
+          <p>대한경제</br> </p>
+          <p>대한 민주운동의 발자취 </p>
+          <p class="highlight">                ✥원경인 중 오삼환✥</p>
+          <p><span class="emph">원</span> = 원조경제: 이미국 원조에 전적으로 의존하던 생존 중심 경제</p>
+<p><span class="emph">    경</span> = 경제개발계획: 국가 주도의 산업 육성 전략, 5개년 계획 시작</p>
+<p><span class="emph">         인</span> = 인프라: 경부고속도로, 포항제철 등 기반 산업 확장</p>
+<p><span class="emph">                중</span> = 중공업·무기산업 집중 육성으로 기술 축적 시작</p>
+<p><span class="emph">                       오</span> = 오일쇼크: 두 차례 석유파동으로 수입물가 상승, 외채 폭증</p>
+<p><span class="emph">                   삼</span> = 3저 호황: 저달러·저금리·저유가로 인한 수출 대호황</p>
+<p><span class="emph">              환</span> = 외환위기: 1997 국가부도 직전, IMF 구제금융 요청 사태</br> </br> </p>
+
+<p class="highlight">4.19 혁명</p>
+<p>한국전쟁 후 초토화된 경제는 미국의 식량·자본·기술 원조 없이는 버틸 수 없는 상황</br>국민 생존과 복구가 최우선 과제였으며, 자립경제의 기초조차 부재했다.</br> </p>
+  <p class="highlight">전태일 분신</p>
+<p>제1차 경제개발 5개년 계획(1962~)이 본격 추진되며 경공업 중심 수출지향 전략 개시.</br>국가가 목표 산업을 지정하고 자본·노동을 집중시킨 박정희 정부의 계획 모빌리제이션.</br> </p>
+  <p class="highlight">유신헌법</p>
+<p>경부고속도로(1970), 포항제철(1973), 전력망 확장, 통신망 정비 등..</br>국가 산업기반 확충을 통해 국토 공간의 경제화가 이뤄졌다.</br> </p>
+  <p class="highlight">부마 항쟁</p>
+<p>철강, 조선, 전자, 석유화학, 기계 등 중공업 육성.</br>동시에 무기산업과 연계돼 국가 안보·경제가 통합된 전략 산업을 추진했다.</br> </p>
+  <p class="highlight">5.18 광주민주화운동</p>
+<p>석유 의존형 산업구조에서 국제유가 급등은 곧바로 위기로 이어졌다.</br>물가 상승, 외채 증가, 수출 경쟁력 약화 등 첫 번째 구조 위기가 도래하였다.</br> </p>
+  <p class="highlight">6월 민주 항쟁</p>
+<p>저금리·저유가·저달러</br>세계 경제 조건이 맞물리며 수출 대호황 도래했다. 무역흑자, 외환보유고 증가와</br> 대기업이 글로벌로 시장을 확장하는 등 외형상 황금기를 맞았다.</p>
+  <p class="highlight">6월 민주 항쟁</br> </p>
+<p>금융자율화 이후 외자 유입 급증 → 단기자본 이탈 → 환율 폭등 </br>→ 재벌 부실, 외채 상환 불가, 국가부도 선언.</br>IMF의 구조조정 명령</br> </br> </p>
+
+<p>작은 열쇳말</p>
+          <div class="keyword-group">
+  <span class="keyword">미국원조</span>
+  <span class="keyword">식량구호</span>
+</div>
+<div class="keyword-group">
+  <span class="keyword">계획경제</span>
+  <span class="keyword">수출지향</span>
+  <span class="keyword">개발독재</span>
+  <span class="keyword">5개년</span>
+</div>
+<div class="keyword-group">
+  <span class="keyword">경부고속도로</span>
+  <span class="keyword">제철소</span>
+  <span class="keyword">송전망</span>
+  <span class="keyword">공업단지</span>
+</div>
+<div class="keyword-group">
+  <span class="keyword">중공업</span>
+  <span class="keyword">중화학</span>
+  <span class="keyword">수출산업</span>
+</div>
+<div class="keyword-group">
+  <span class="keyword">외채</span>
+  <span class="keyword">유가</span>
+</div>
+<div class="keyword-group">
+  <span class="keyword">수출흑자</span>
+  <span class="keyword">IMF</span>
+  <span class="keyword">금모으기운동</span>
+</div>
+        </div>
+      </div>
+      <div class="right-panel">
+        <div class="image-grid">
+          <div class="grid-divider"></div>
+          <div class="image-column">
+          <h3 class="category-title">사진</h3>
+          <div class="image-item"><img src="dhgj.p1.jpg" alt="Projektname 2"><p>1950년대, 전쟁 이후 황폐해진 남한의 현실</p></div>
+          <div class="image-item"><img src="dhgj.p2.jpg" alt="Projektname 2"><p>1차 경제개발계획 5개년 조형물</p></div>
+          <div class="image-item"><img src="dhgj.p3.jpg" alt="Projektname 3"><p>경부고속도로 건설현장을 시찰하는 박정희 대통령</p></div>
+          <div class="image-item"><img src="dhgj.p4.jpg" alt="Projektname 1"><p>경부고속도로 개통식</p></div>
+          <div class="image-item"><img src="dhgj.p5.jpg" alt="Projektname 2"><p>포항제철 준공식</p></div>
+          <div class="image-item"><img src="dhgj.p6.jpg" alt="Projektname 1"><p>포항제철 준공식에 참석한 박정희 대통령과 박태준 사장</p></div>
+          <div class="image-item"><img src="dhgj.p7.jpg" alt="Projektname 3"><p>제2차 오일쇼크 당시,</br>오르는 기름값 때문에 택시회사와 기사들 사이에는 지입금 시비가 일어 아예 번호판을 떼고 세무서에 휴업계를 내기도 했다.</p></div>
+          <div class="image-item"><img src="dhgj.p8.jpg" alt="Projektname 1"><p>IMF 외환위기 당시 신문</p></div>
+          <div class="image-item"><img src="dhgj.p9.jpg" alt="Projektname 2"><p>
+          외환위기 당시 국민들의 '금모으기 운동'</p></div>
+          </div>
+
+       <div class="image-column">
+         <h3 class="category-title">문학</h3>
+          <div class="image-item"><img src="dhzz.y4.jpg" alt="Projektname 6"><p>황석영 - ⟪객지⟫ 소설 </br>1960년대 후반 바닷가 간척공사 현장을 배경으로 저임금과 부당한 처우에 시달리던 떠돌이 노동자들이 쟁의를 일으키는 과정을 그린 작품이다.</p></div>
+          <div class="image-item"><img src="dhgj.y2.jpg" alt="Projektname 7"><p>조세희 - ⟪난장이가 쏘아 올린 작은 공⟫ 소설 </br>1970년대 대한민국 도시 빈민층의 삶의 좌절과 애환을 다룬 연작 소설이다.</p></div>
+          <div class="image-item"><img src="dhgj.y3.jpg" alt="Projektname 7"><p>박노해 - ⟪노동의 새벽⟫ 시 </br>1980년대의 힘든 야간작업을 마친 노동자들의 지친모습을 그리고 있다.</p></div>
+          <div class="image-item"><img src="dhgj.y4.jpg" alt="Projektname 7"><p>김중미 - ⟪괭이부리말 아이들⟫ 동화 </br>IMF 외환위기를 배경으로 지역주민들의 진솔한 삶을 보여주는 작품이다.</p></div>
+      </div>
+       <div class="image-column">
+         <h3 class="category-title">예술</h3>
+          <div class="image-item"><img src="dhgj.a1.jpg" alt="Projektname 8"><p><국가부도의 날> 영화 2018</br>한국 영화 최초로 1997년 외환 위기를 배경으로 한다.</p></div>
+      </div>
+      <div class="image-column">
+         <h3 class="category-title">공간</h3>
+          <div class="image-item"><img src="dhgj.m1.jpg" alt="Projektname 6"><p>국립중앙은행 화폐박물관(서울)</p></div>
+          <div class="image-item"><img src="dhgj.m2.jpg" alt="Projektname 7"><p>경부고속도로 개통 기념비(경북 김천)</p></div>
+          <div class="image-item"><img src="dhgj.m3.jpg" alt="Projektname 8"><p>포스코 역사관(포항)</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+ <a href="index.html#content" class="floating-circle-btn">🡠</a>
+ <script>
+  document.querySelectorAll('.image-item').forEach(item => {
+    const desc = item.querySelector('p');
+
+    item.addEventListener('click', () => {
+      const isOpen = desc.classList.contains('open');
+
+      if (!isOpen) {
+        desc.classList.add('open');
+        desc.style.maxHeight = desc.scrollHeight + "px";
+      } else {
+        desc.style.maxHeight = desc.scrollHeight + "px";
+        requestAnimationFrame(() => {
+          desc.style.maxHeight = "0px";
+          desc.classList.remove('open');
+        });
+      }
+    });
+  });
+
+  // 스크롤 시 닫기
+  let scrollTimeout;
+  const scrollTarget = document.querySelector('.right-panel');
+
+  if (scrollTarget) {
+    scrollTarget.addEventListener('scroll', () => {
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(() => {
+        document.querySelectorAll('.image-item p.open').forEach(desc => {
+          desc.style.maxHeight = desc.scrollHeight + "px"; // 현재 높이 재설정
+          requestAnimationFrame(() => {
+            desc.style.maxHeight = "0px";
+            desc.classList.remove('open');
+          });
+        });
+      }, 50);
+    });
+  }
+</script>
+</body>
+</html>
