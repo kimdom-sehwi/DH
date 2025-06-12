@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Realgrün Layout</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      overflow: hidden;
+      font-family: 'Noto Sans', sans-serif;
+      background-color: #22243B;
+    }
+    
+    
+
+    #wrapper {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+
+    header.header {
+      text-align: center;
+      transition: top 0.3s ease;
+      position: sticky;
+      top: 0;
+      width: 100%;
+      z-index: 9;
+      font-size: 1rem;
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid #6674FF;
+      height: 43px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #00B9FF;
+    }
+
+    .container {
+      display: flex;
+      flex: 1;
+      height: calc(100vh - 43px);
+    }
+
+    .left-panel {
+      width: 40%;
+      background-color: #22243B;
+      padding: 20px;
+      overflow-y: scroll;
+      scrollbar-width: none;
+    }
+
+    .left-panel::-webkit-scrollbar {
+      display: none;
+    }
+
+    .right-panel {
+      width: 60%;
+      background-color: #22243B;
+      padding: 20px;
+      overflow-y: scroll;
+    }
+
+    .emph {
+  font-weight: bold; 
+}
+
+    .text-content p {
+      margin-bottom: 10px;
+      font-size: 16px;
+      line-height: 1.6;
+      white-space: pre;
+      color: #00B9FF;
+    }
+
+    .text-content .highlight {
+      color: #00FFFF;
+      font-weight: bold;
+    }
+    .category-title {
+     font-size: 12px;
+     font-weight: lighter;
+     margin-bottom: 10px;
+     color: #00FFFF;
+    }
+    .image-column {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  flex: 1;
+  max-height: calc(100vh - 43px); 
+  overflow-y: auto;
+  padding-right: 5px; 
+  scrollbar-width: thin;
+  scrollbar-width: none; !important;         
+  -ms-overflow-style: none;       
+}
+
+.image-column::-webkit-scrollbar {
+  display: none;                  
+}
+
+.image-column::-webkit-scrollbar {
+  width: 0;
+  background: transparent;
+}
+
+    .image-grid {
+      display: flex;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      position: relative;
+    }
+
+    .image-grid::before,
+    .image-grid::after,
+    .image-grid .grid-divider {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 0.5px;
+      background-color: #00FFFF;
+    }
+
+    .image-grid::before {
+      left: 24%;
+    }
+    .image-grid::after {
+      left: 75%;
+    }
+    .grid-divider {
+      left: 50%;
+    }
+
+    .image-item img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .image-item p {
+      margin-top: 5px;
+      font-size: 14px;
+    }
+    .keyword-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 20px 0;
+}
+
+.keyword {
+  display: inline-block;
+  background-color: #00F08C;
+  color: #22243B;
+  padding: 6px 10px;
+  border-radius: 12px;
+  font-size: 13px;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+    .floating-circle-btn {
+  position: fixed;
+  right: 30px;
+  bottom: 20px;  
+  width: 35px;
+  height: 35px;
+  background-color: #6674FF;
+  border: 1px solid #6674FF;
+  border-radius: 50%;
+  color: #ffffff;
+  font-size: 10px;
+  text-align: center;
+  line-height: 35px;
+  text-decoration: none;
+  z-index: 9999;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  transition: all 0.3s ease;
+}
+  .image-item p {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease, opacity 0.4s ease;
+  opacity: 0;
+  margin-top: 0;
+  font-size: 12px;
+  font-weight: lighter;
+  color: #FFFFFF;
+  hyphens: none;
+  overflow-wrap: normal;
+  word-break: keep-all;
+  }
+
+ .image-item p.open {
+  max-height: 200px; 
+  opacity: 1;
+  margin-top: 5px;
+}
+
+.floating-circle-btn:hover {
+  background-color: #00FFFF;
+  color: black;
+}
+    .left-panel,
+    .right-panel,
+    .left-panel * ,
+    .right-panel * {
+    cursor: url('cursor.png') 16 16, auto !important;
+    }
+  </style>
+</head>
+<body>
+  <div id="wrapper">
+    <header class="header">
+      ✺대한민주✺
+    </header>
+    <div class="container">
+      <div class="left-panel">
+        <div class="text-content">
+          <p>대한민주</br> </p>
+          <p>대한 민주운동의 발자취 </p>
+          <p class="highlight">                ✥사전 유부 오육✥</p>
+          <p><span class="emph">사</span> = 4.19혁명: 이승만 정권의 부정선거에 분노한 학생과 시민들이 거리로 나서며 </br>                       독재를 무너뜨린 최초의 시민봉기</p>
+<p><span class="emph">    전</span> = 전태일 분신: 노동자의 비인간적 현실을 고발하며 “근로기준법을 지켜라!”</br>                               외친 청년 노동자의 죽음이 노동운동의 불을 지핌</p>
+<p><span class="emph">         유</span> = 유신헌법: 박정희가 종신집권을 위해 국민투표로 통과시킨 독재헌법, </br>                               권력의 전면적 구조화 </p>
+<p><span class="emph">                부</span> = 부마항쟁: 유신 말기, 부산과 마산에서 대학생·시민들이 들고일어난 </br>                                       대규모 도시항쟁. 이는 곧 박정희 체제 붕괴로 이어졌다.</p>
+<p><span class="emph">                       오</span> = 5.18광주민주화운동: 전두환 신군부의 권력 찬탈에 저항한 </br>                              광주시민들의 항거. 계엄군의 무력 진압으로 참극 발생</br></p>
+<p><span class="emph">                  육</span> = 6월 민주항쟁: “호헌 철폐, 독재 타도” 외침 아래 </br>                         전국적 시민 항쟁이 폭발하며 대통령 직선제 쟁취</br> </br> </p>
+
+<p class="highlight">4.19 혁명</p>
+<p>1960년 3·15 부정선거에 항의한 마산 시위와 서울 시민봉기가 확산되며</br>이승만 하야를 이끌어냈으며 학생과 시민이 결합한 최초의 대중 민주화 운동으로 평가된다.</br> </p>
+  <p class="highlight">전태일 분신</p>
+<p>평화시장 봉제노동자였던 전태일은 1970년 “근로기준법을 지켜라!”를 외치며 분신.</br>이후 노동운동과 민중운동에 도덕적·상징적 불꽃을 붙였다.</br> </p>
+  <p class="highlight">유신헌법</p>
+<p>박정희가 국회를 해산하고 통일주체국민회의를 통해 대통령 중임 제한 폐지.</br> 유신체제라는 강압적 통치가 시작된 정치적 분수령.</br> </p>
+  <p class="highlight">부마 항쟁</p>
+<p>1979년 10월, 부산과 마산에서 고조된 반유신 시위. </br>시민과 대학생이 함께 거리에 나섰고, 유신 붕괴의 직접적 계기가 되었다.</br> </p>
+  <p class="highlight">5.18 광주민주화운동</p>
+<p>1980년 5월, 계엄 확대에 반발한 광주시민들이 신군부에 맞선 항쟁. </br>수많은 민간인 학살과 함께 민주주의의 피로 쓴 서사로 남았다.</br> </p>
+  <p class="highlight">6월 민주 항쟁</p>
+<p>박종철 고문치사 사건 → 이한열 피격 → 호헌 철폐 외침으로 폭발. </br>국민 항거로 대통령 직선제 쟁취라는 중대한 제도 변화를 실현하였다.</br> </br> </p>
+
+<p>작은 열쇳말</p>
+          <div class="keyword-group">
+  <span class="keyword">시위</span>
+  <span class="keyword">하야</span>
+  <span class="keyword">직선제</span>
+</div>
+<div class="keyword-group">
+  <span class="keyword">전태일</span>
+  <span class="keyword">근로기준법</span>
+  <span class="keyword">평화시장</span>
+  <span class="keyword">노동권</span>
+</div>
+<div class="keyword-group">
+  <span class="keyword">통일주체국민회의</span>
+  <span class="keyword">박정희</span>
+</div>
+<div class="keyword-group">
+  <span class="keyword">계엄령</span>
+  <span class="keyword">민간인 학살</span>
+  <span class="keyword">계엄군</span>
+</div>
+<div class="keyword-group">
+  <span class="keyword">5.18기록관</span>
+  <span class="keyword">진상규명</span>
+  <span class="keyword">1.4 후퇴</span>
+</div>
+<div class="keyword-group">
+  <span class="keyword">"호언철폐 독재타도"</span>
+  <span class="keyword">"책상을 탁! 치니 억! 하고"</span>
+</div>
+        </div>
+      </div>
+      <div class="right-panel">
+        <div class="image-grid">
+          <div class="grid-divider"></div>
+          <div class="image-column">
+          <h3 class="category-title">사진</h3>
+          <div class="image-item"><img src="dhmj.p1.jpg" alt="Projektname 2"><p>4.19혁명 당시 사진</p></div>
+          <div class="image-item"><img src="dhmj.p2.jpg" alt="Projektname 2"><p>하와이로 망명가기 위해 비행기에 오르는 이승만</p></div>
+          <div class="image-item"><img src="dhmj.p3.jpg" alt="Projektname 3"><p>전태일의 영정을 끌어안은 그의 어머니</p></div>
+          <div class="image-item"><img src="dhmj.p4.jpg" alt="Projektname 1"><p>평화시장 입사 당시 동료들과 전태일</p></div>
+          <div class="image-item"><img src="dhmj.p5.jpg" alt="Projektname 2"><p>
+          10월 유신, 즉 7차 개헌이 이루어진 개정식의 사진</p></div>
+          <div class="image-item"><img src="dhmj.p6.jpg" alt="Projektname 1"><p>사격연습을 하고 있는 박정희 대통령</p></div>
+          <div class="image-item"><img src="dhmj.p7.jpg" alt="Projektname 3"><p>부마항쟁 당시 군인과 시민의 대치 상황</p></div>
+          <div class="image-item"><img src="dhmj.p8.jpg" alt="Projektname 1"><p>5.18 광주민주화운동 당시 광주 시내</p></div>
+          <div class="image-item"><img src="dhmj.p9.jpg" alt="Projektname 2"><p>
+          5.18 광주민주화운동 당시 계엄군에게 무차별 폭행을 당하는 시민의 모습</p></div>
+          <div class="image-item"><img src="dhmj.p10.jpg" alt="Projektname 1"><p>6월 민주항쟁 당시 최루탄에 피격당한 이한열</p></div>
+          </div>
+
+       <div class="image-column">
+         <h3 class="category-title">문학</h3>
+         <div class="image-item"><img src="dhmj.y3.jpg" alt="Projektname 7"><p>문병란 - ⟪부활의 노래⟫ 시</br>5.18을 다룬 가장 최초의 시로서, 진실의 부활을 염원하고 이들을 기억해야 한다는 메세지를 전달한다.</p></div>
+         <div class="image-item"><img src="dhmj.y4.jpg" alt="Projektname 7"><p>황석영 - ⟪죽음을 넘어 시대의 어둠을 넘어⟫ 저술서</br>5·18민주화운동에 대한 최초의 체계적인 기록물이다.</p></div>
+          <div class="image-item"><img src="dhmj.y1.jpg" alt="Projektname 6"><p>한강 - ⟪소년이 온다⟫ 소설</br>1980년 5월 18일부터 열흘간 있었던 광주 민주화 운동 당시의 상황과 그 이후 남겨진 사람들의 이야기를 들려주는 소설이다.</p></div>
+      </div>
+       <div class="image-column">
+         <h3 class="category-title">예술</h3>
+          <div class="image-item"><img src="dhmj.a1.jpg" alt="Projektname 8"><p><화려한 휴가> 영화 2007</br>5·18 광주 민주화 운동을 소재로 한 영화이다.</p></div>
+          <div class="image-item"><img src="dhmj.a2.jpg" alt="Projektname 8"><p><아름다운 청년 전태일> 다큐드라마 1995</br>노동운동가 전태일의 일생을 그렸다.</p></div>
+          <div class="image-item"><img src="dhmj.a3.jpg" alt="Projektname 8"><p><남영동1985> 영화 2012</br>정치인 김근태가 민주화 운동 시절 민주화운동청년연합 사건으로 남영동 대공분실에 잡혀들어가 22일 동안 받은 고문에 관해 다룬 영화이다.</p></div>
+          <div class="image-item"><img src="dhmj.a5.jpg" alt="Projektname 8"><p><택시운전사> 영화 2017</br> 5·18 광주 민주화 운동 당시 광주시민의 이야기를 다루고 있다.</p></div>
+          <div class="image-item"><img src="dhmj.a4.jpg" alt="Projektname 8"><p><1987> 영화 2017</br>고(故) 박종철 고문치사 사건을 시작으로 6월 항쟁까지, 대한민국 현대사의 분수령이 된 1987년의 사건들을 담고 있다.</p></div>
+      </div>
+      <div class="image-column">
+         <h3 class="category-title">공간</h3>
+          <div class="image-item"><img src="dhmj.m1.jpg" alt="Projektname 6"><p>전태일기념관(서울)</br>노동운동가 전태일의 생애와 업적을 전시하는 기념관이다.</p></div>
+          <div class="image-item"><img src="dhmj.m2.jpg" alt="Projektname 7"><p>부산민주공원(부산)</br>4·19 혁명과 부마민주항쟁, 6월 항쟁으로 이어져 내려오는 부산 시민의 숭고한 민주 희생 정신을 기리기 위해 조성된 공원이다.</p></div>
+          <div class="image-item"><img src="dhmj.m3.jpg" alt="Projektname 8"><p>5·18민주화운동기록관(광주)</br>5·18 민주화운동 기록유산을 체계적으로 수집하여 영구 보존하고 공유하기 위해 세워졌다.</p></div>
+          <div class="image-item"><img src="dhmj.m4.jpg" alt="Projektname 8"><p>5·18국립묘지(광주)</br>5·18 광주 민주화 운동에 대한 재평가작업 및 5·18 희생자 묘역을 민주성지로 가꾸기 위해 조성되었다.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+ <a href="index.html#content" class="floating-circle-btn">🡠</a>
+ <script>
+  document.querySelectorAll('.image-item').forEach(item => {
+    const desc = item.querySelector('p');
+
+    item.addEventListener('click', () => {
+      const isOpen = desc.classList.contains('open');
+
+      if (!isOpen) {
+        desc.classList.add('open');
+        desc.style.maxHeight = desc.scrollHeight + "px";
+      } else {
+        desc.style.maxHeight = desc.scrollHeight + "px";
+        requestAnimationFrame(() => {
+          desc.style.maxHeight = "0px";
+          desc.classList.remove('open');
+        });
+      }
+    });
+  });
+
+  // 스크롤 시 닫기
+  let scrollTimeout;
+  const scrollTarget = document.querySelector('.right-panel');
+
+  if (scrollTarget) {
+    scrollTarget.addEventListener('scroll', () => {
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(() => {
+        document.querySelectorAll('.image-item p.open').forEach(desc => {
+          desc.style.maxHeight = desc.scrollHeight + "px"; // 현재 높이 재설정
+          requestAnimationFrame(() => {
+            desc.style.maxHeight = "0px";
+            desc.classList.remove('open');
+          });
+        });
+      }, 50);
+    });
+  }
+</script>
+</body>
+</html>
